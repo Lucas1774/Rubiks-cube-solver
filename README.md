@@ -13,7 +13,8 @@ Unfortunately, most of its customization is only possible within the code: the b
 
 ## Usage
 
-It can be run without arguments or with one that should be the path of a one-line (I used to compile this data, that's why it's stored in a single line instead of in a table) CSV file with the memorization key. This key is based on the letter pair memorization technique, used also for memorizing cards. I won't share mine for reasons that you will find very reasonable if you think about it.
+It can be run without arguments or with one that should be the path of a one-line (I used to compile this data, that's why it's stored in a single line instead of in a table) CSV file with the memorization key. This key is based on the letter pair memorization technique, used also for memorizing cards. I won't share mine for reasons that you will find very reasonable if you think about it.  
+The .csv files must be inside a "src" folder in the same directory as the executable.
 
 ## Key
 

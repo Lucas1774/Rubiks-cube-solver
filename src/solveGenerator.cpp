@@ -16,6 +16,9 @@ using namespace std;
 typedef int array24 [numberofstickers];
 typedef int matrix6by8 [6][8];
 typedef int matrix6by12 [6][12];
+const string parity_path="src/parityAlgs.csv";
+const string corners_path="src/cornerAlgs.csv";
+const string edges_path="src/edgeAlgs.csv";
 const string emptyscramble="";
 const string scramblemoves[3][6]= {{"U ","U2 ","U' ","D ","D2 ","D' "},{"F ","F2 ","F' ","B ","B2 ","B' "},{"R ","R2 ","R' ","L ","L2 ","L' "}};
 const array24 solvedstate_corners= {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
@@ -58,19 +61,19 @@ int main(int argc, char*argv[]){
     
     //parsing algs
     string algorithms_parity[42];
-    ifstream parityFile ("parityAlgs.csv");
+    ifstream parityFile (parity_path);
         for (int i=0; i<42; i++){
             getline(parityFile,aux,',');
             algorithms_parity[i] = aux;
         }
     string algorithms_corners[441];
-    ifstream cornerFile ("cornerAlgs.csv");
+    ifstream cornerFile (corners_path);
         for (int i=0; i<441; i++){
             getline(cornerFile,aux,',');
             algorithms_corners[i] = aux;
         }
     string algorithms_edges[484];
-    ifstream edgeFile ("edgeAlgs.csv");
+    ifstream edgeFile (edges_path);
         for (int i=0; i<484; i++){
             getline(edgeFile,aux,',');
             algorithms_edges[i] = aux;
@@ -78,7 +81,7 @@ int main(int argc, char*argv[]){
 
     setlocale(LC_ALL, "");
     srand(time(NULL));
-    while (option != 'N'){
+    while (option != 'n'){
         //reset
         scramble= emptyscramble;
         for(int i=0; i<numberofstickers; i++){
@@ -301,7 +304,7 @@ int main(int argc, char*argv[]){
                 cout<< algorithms_edges[((twist_edges[2*i]-2)*22)+ (twist_edges[2*i+1]-2)]<< "\n";
             }
         }
-        cout<< "again? (*/N)\n";
+        cout<< "Again? [Y/n]\n";
         cin >> option;
     }
     return 0;
