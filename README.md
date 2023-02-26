@@ -14,11 +14,17 @@ Unfortunately, most of its customization is only possible within the code: the b
 ## Usage
 
 It can be run without arguments or with one that should be the path of a one-line (I used to compile this data, that's why it's stored in a single line instead of in a table) CSV file with the memorization key. This key is based on the letter pair memorization technique, used also for memorizing cards. I won't share mine for reasons that you will find very reasonable if you think about it.  
-The .csv files must be inside a "src" folder in the same directory as the executable.
+The other .csv files must be inside a "src" folder in the same directory as the executable.
 
 ## Key
 
-I don't remember what order the values in the CSV files should follow. This is the key the program uses to define scrambled states and whatnot:
+The algorithms in the .csv files should follow the order you would expect, excluding the buffer pieces (UFR and UF), eg, the first algorithm in the corners file would be 3-3, this is, move the sticker 3 to spot 3, which obviously doesn't require any algorithm at all (but does require an entrance in the .csv file -> ",,"). The second one would be 3-4, this is, rotating the UFL corner clockwise. The fourth algorithm would be 3-6, which is the one associated with the UFR-UFL-UBR 3-cycle.  
+For the parity algorithms, the first two are (UF-UR)-(UFR-UFL) and (UF-UR)-(UFR-FUL), so first every corner and the UR edge sticker, then every corner and the RU sticker.  
+For the letter pairs, every combination but those including buffer stickers (23 * 23) must appear in the order ABCDEFJHIKLMNOPRSTUVYZX (it's not exactly alphabetic because I actually use numbers for the *-X or X-* tuples), this is, A-A, A-B... ...X-X.  
+If I were to rewrite this program today, I would make it so for sequences every combination starting with 0-0 and ending with 23-23 must appear, and for letter pairs it appears every one starting with whatever letter the sticker 0 corresponds to and ending with whichever one the sticker 23 does.
+
+This is the key the program uses to define scrambled states and pick algorithms from the database.    
+The letter code is implemented in the "alphabet" arrays: the value in spot 1 of the corners one is 16 because sticker 1 corresponds to the letter 16 (S).
 
                          |-----||-----||-----|
                          |  22 ||  19 ||  20 |
