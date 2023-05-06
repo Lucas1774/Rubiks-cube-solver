@@ -27,7 +27,7 @@ const string letters_corners= "0SFMXBRVPUNLITCOYJEKDAHZ";
 const array24 alphabet_corners={23,16,5,11,22,1,15,19,14,18,12,10,8,17,2,13,20,6,4,9,3,0,7,21};
 const array24 solvedstate_edges= {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
 const matrix6by8 stickerspermutations_edges {{0,4,6,2,1,5,7,3},{12,14,18,16,13,15,19,17},{0,9,12,11,1,8,13,10},{6,23,18,21,7,22,19,20},{2,20,14,8,3,21,15,9},{4,10,16,22,5,11,17,23}};
-const string letters_edges= "0XRSMNUVFJCBIYOKATEHDPLZ";
+const string letters_edges= "0XRSMN\332UFJKB\315I\323O\301A\311EDPLZ";
 const array24 alphabet_edges={23,22,15,16,11,12,18,19,5,6,2,1,8,20,13,9,0,17,4,7,3,14,10,21};
 
 int main(int argc, char*argv[]){
