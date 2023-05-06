@@ -305,7 +305,7 @@ int main(int argc, char*argv[]){
             }
         }
         cout<< "Again? [Y/n]\n";
-        cin >> option;
+        option = cin.get();
     }
     return 0;
 }
