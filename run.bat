@@ -1,0 +1,1 @@
+.\solveGenerator.exe src/letterPairs.csv
