@@ -7,9 +7,9 @@ The program is definitely a little over the place and screams for some structuri
 It generates a Rubik's cube scramble and then solves it using an algorithm database and the "3-style" method, which is usually used by humans to solve it blindfolded. These algorithms are the ones I use, so the program pretty much solves it as I would. It could be possible to obtain these algorithms or the whole solution using pathfinding, but there is plenty of software that already does this. This is supposed to be a somewhat (not really) customizable humanlike solve generator.
 
 To generate the scramble it uses two randomly generated seeds, one linked to the layer to turn, the other to the turn to make (CW, CCW or double). The scrambled state is obtained during the scramble, which is definitely an ugly solution.
-Then, in a VERY oversimplified way, it observes the path that the pieces should follow for them to end up in their correct spot, and creates a vector of "targets". These target vectors are then interpreted to display their associated algorithms sequence.
+Then, in a VERY oversimplified way, it observes the path that the pieces should follow for them to end up in their correct spot, and creates a vector of "targets". These target vectors are then interpreted to display their associated algorithm sequence.
 
-Unfortunately, most of its customization is only possible within the code: the buffer choice, the letter key, the order in which the three tasks are done or the orientation method (and others I might be forgetting). There is too much style variety for me to make a "universal 3-style Rubik's cube solver". I am (was) a junior computer science student, after all, driven by the shame of not knowing a single programming language after a whole semester.
+Unfortunately, most of its customization is only possible within the code: the buffer choice, the letter key, the order in which the three tasks are done or the orientation method (and others I might be forgetting). There is too much style variety for me to make a "universal 3-style Rubik's cube solver". I <s>am</s> was a junior computer science student, after all, driven by the shame of not knowing a single programming language after a whole semester.
 
 ## Usage
 
