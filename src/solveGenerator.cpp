@@ -5,6 +5,7 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ const array24 solvedState_edges= {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 const matrix6by8 stickerPermutations_edges {{0,4,6,2,1,5,7,3},{12,14,18,16,13,15,19,17},{0,9,12,11,1,8,13,10},{6,23,18,21,7,22,19,20},{2,20,14,8,3,21,15,9},{4,10,16,22,5,11,17,23}};
 const string letters_edges= "0XRSMN\332UFJKB\315I\323O\301A\311EDPLZ";
 const array24 alphabet_edges={23,22,15,16,11,12,18,19,5,6,2,1,8,20,13,9,0,17,4,7,3,14,10,21};
+const int REPETITIONS = 1000000;
 
 int main(int argc, char*argv[]){
 
@@ -79,9 +81,14 @@ int main(int argc, char*argv[]){
             algorithms_edges[i] = aux;
         }
 
+    long corner_targets_frequency[11] = {0};
+    long edge_targets_frequency[17] = {0};
+    long twisted_corner_frequency[8] = {0};
+    long twisted_edge_frequency[12] = {0};
+
     setlocale(LC_ALL, "");
     srand(time(NULL));
-    while (option != 'n'){
+    for (int m = 0; m < REPETITIONS; m++) {
         //reset
         scramble= emptyScramble;
         for(int i=0; i<numberOfStickers; i++){
@@ -246,66 +253,32 @@ int main(int argc, char*argv[]){
                 if (floor(newTarget_edges/2)==cyclePiece_edges && cyclePiece_edges!=0){
                     path_edges.push_back (newTarget_edges);
                 }
-            } 
-        }
+            }
 
-        //generate party
-        if (path_corners.size()%2!=0){
-            hasParity=true;
-            parity.push_back(path_corners.back());
-            path_corners.erase(path_corners.end()-1);
-            parity.push_back(path_edges.front());
-            path_edges.erase(path_edges.begin());
         }
-
-        //print
-        cout<< "\nscramble\n"<< scramble;
-        cout<< "\n\ncorners\n";
-        for (int i= 0; i<path_corners.size()/2; i++){
-            cout<< letterPairs[ (23*alphabet_corners[path_corners[2*i]])+(alphabet_corners[path_corners[2*i+1]])]; 
-            cout<<" (" << letters_corners[path_corners[2*i]] <<","<< letters_corners[path_corners[2*i+1]] << ")"<<"\n";
-            cout<< algorithms_corners[((path_corners[2*i]-3)*21)+ (path_corners[2*i+1]-3)]<< "\n";
-        }
-        if(hasParity){
-            if(parity[1]==2 || parity[1]==3){
-                isDirect_parity=true;
-            }
-            cout<< "\nparity\n";
-            cout<< letterPairs[ (23*alphabet_corners[parity[0]])+(alphabet_edges[parity[1]])]; 
-            cout<<" (" << letters_corners[parity[0]] <<","<< letters_edges[parity[1]] <<")" <<"\n";
-            if (parity[1]==3){
-                cout<< algorithms_parity[21+ (parity[0]-3)]<<"\n";
-            } else {
-                cout<< algorithms_parity[(parity[0]-3)]<<"\n";
-            }
-            if (!isDirect_parity){
-                cout<< algorithms_edges[(parity[1]-2)]<<"\n";
-            }
-        }
-        cout<< "\nedges\n";
-        for (int i= 0; i<path_edges.size()/2; i++){
-            cout<< letterPairs[ (23*alphabet_edges[path_edges[2*i]])+(alphabet_edges[path_edges[2*i+1]])]; 
-            cout<<" (" << letters_edges[path_edges[2*i]] <<","<< letters_edges[path_edges[2*i+1]] <<")"<<"\n";
-            cout<< algorithms_edges[((path_edges[2*i]-2)*22)+ (path_edges[2*i+1]-2)]<< "\n";
-        }
-        if (hasTwists_corners){
-            cout <<"\ncorner twists\n";
-            for(int i=0; i<twist_corners.size()/2; i++){
-                cout<< letterPairs[ (23*alphabet_corners[twist_corners[2*i]])+(alphabet_corners[twist_corners[2*i+1]])]; 
-                cout<<" (" << letters_corners[twist_corners[2*i]] <<","<< letters_corners[twist_corners[2*i+1]] <<")"<<"\n";
-                cout<< algorithms_corners[((twist_corners[2*i]-3)*21)+ (twist_corners[2*i+1]-3)]<< "\n";
-            }
-        }
-        if (hasTwists_edges){
-            cout <<"\nedge flips\n";
-            for(int i=0; i<twist_edges.size()/2; i++){
-                cout<< letterPairs[ (23*alphabet_edges[twist_edges[2*i]])+(alphabet_edges[twist_edges[2*i+1]])]; 
-                cout<<" (" << letters_edges[twist_edges[2*i]] <<","<< letters_edges[twist_edges[2*i+1]] <<")"<<"\n";
-                cout<< algorithms_edges[((twist_edges[2*i]-2)*22)+ (twist_edges[2*i+1]-2)]<< "\n";
-            }
-        }
-        cout<< "Again? [Y/n]\n";
-        option = cin.get();
+        corner_targets_frequency[path_corners.size()]++;
+        edge_targets_frequency[path_edges.size()]++;
+        twisted_corner_frequency[twist_corners.size() / 2]++;
+        twisted_edge_frequency[twist_edges.size() / 2]++;
     }
+    cout << fixed << setprecision(10);
+
+    for (int i = 0; i < 11; i++)
+    {
+        cout << i << " corner targets frequency: " << (double)corner_targets_frequency[i] / REPETITIONS << endl;
+    }
+    for (int i = 0; i < 17; i++)
+    {
+        cout << i << " edge targets frequency: " << (double)edge_targets_frequency[i] / REPETITIONS << endl;
+    }
+    for (int i = 0; i < 8; i++)
+    {
+        cout << i << " twisted corner frequency: " << (double)twisted_corner_frequency[i] / REPETITIONS << endl;
+    }
+    for (int i = 0; i < 12; i++)
+    {
+        cout << i << " twisted edge frequency: " << (double)twisted_edge_frequency[i] / REPETITIONS << endl;
+    }
+
     return 0;
 }
