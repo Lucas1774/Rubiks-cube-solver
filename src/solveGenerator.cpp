@@ -91,13 +91,16 @@ int main(int argc, char *argv[])
             else
             {
                 turn_layer = rand() % 4;
-                if (turn_layer == second_to_last_move_index)
+                if (turn_layer == last_move_index || turn_layer == second_to_last_move_index)
                 {
-                    turn_layer += 2;
-                }
-                else if (turn_layer == last_move_index)
-                {
-                    turn_layer++;
+                    if (0 == turn_layer % 2)
+                    {
+                        turn_layer += 2;
+                    }
+                    else
+                    {
+                        turn_layer++;
+                    }
                 }
             }
             turn_iterator = rand() % 3;
